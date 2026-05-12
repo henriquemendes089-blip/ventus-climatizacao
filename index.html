@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventus Climatização — Ar-condicionado em Divinópolis/MG</title>
+  <meta name="description" content="Venda, instalação e manutenção de ar-condicionado em Divinópolis/MG. Equipe técnica certificada, preço justo e garantia no serviço. Fale agora no WhatsApp.">
+  <meta name="keywords" content="ar condicionado divinopolis, instalação ar condicionado mg, manutenção ar condicionado, ventus climatizacao">
+  <meta property="og:title" content="Ventus Climatização — Ar-condicionado em Divinópolis/MG">
+  <meta property="og:description" content="Venda, instalação e manutenção de ar-condicionado com equipe técnica certificada em Divinópolis e região.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Barlow Condensed (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET & BASE ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ice:      #38BDF8;
+      --sky:      #0EA5E9;
+      --deep:     #0369A1;
+      --navy:     #0C1A28;
+      --navy-2:   #0F2236;
+      --dark:     #1E293B;
+      --slate:    #334155;
+      --muted:    #64748B;
+      --light:    #F0F9FF;
+      --white:    #FFFFFF;
+      --border:   #E2E8F0;
+
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --radius-card:  16px;
+      --radius-btn:   8px;
+      --shadow-card:  0 4px 24px rgba(14,165,233,.08);
+      --shadow-hover: 0 20px 60px rgba(14,165,233,.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* ── NAVBAR ────────────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .35s, backdrop-filter .35s, box-shadow .35s, padding .35s;
+    }
+
+    #navbar.scrolled {
+      background: rgba(10, 22, 36, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 1px 0 rgba(56,189,248,.12), 0 4px 24px rgba(0,0,0,.2);
+      padding: .9rem 2rem;
+    }
+
+    .nav-logo img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.78);
+      font-size: .875rem;
+      font-weight: 500;
+      letter-spacing: .025em;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--ice); }
+
+    .btn-nav-cta {
+      background: var(--ice);
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      font-size: .825rem !important;
+      letter-spacing: .05em !important;
+      padding: .5rem 1.25rem;
+      border-radius: var(--radius-btn);
+      transition: background .2s, transform .15s, box-shadow .2s !important;
+    }
+
+    .btn-nav-cta:hover {
+      background: #7DD3FC !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(56,189,248,.35);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile menu overlay */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 18, 28, .97);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    #mobile-menu.open { display: flex; }
+
+    #mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      color: rgba(255,255,255,.6);
+      font-size: 1.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+      transition: color .2s;
+    }
+
+    #mobile-close:hover { color: var(--ice); }
+
+    #mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: white;
+      transition: color .2s;
+    }
+
+    #mobile-menu a:hover { color: var(--ice); }
+
+    #mobile-menu .mobile-cta {
+      margin-top: .5rem;
+      color: var(--ice) !important;
+      font-size: 1.5rem !important;
+      border: 2px solid rgba(56,189,248,.4);
+      padding: .6rem 2rem;
+      border-radius: var(--radius-btn);
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(155deg,
+        #050E18 0%,
+        #071525 30%,
+        #0C1E34 60%,
+        #071828 100%
+      );
+    }
+
+    /* Grid de linhas técnicas */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+
+    /* Glow central */
+    .hero-glow {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle,
+        rgba(14,165,233,.13) 0%,
+        rgba(3,105,161,.06) 40%,
+        transparent 70%
+      );
+      top: 50%;
+      left: 42%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 70px 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(56,189,248,.08);
+      border: 1px solid rgba(56,189,248,.25);
+      color: var(--ice);
+      padding: .4rem 1.1rem .4rem .8rem;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--ice);
+      border-radius: 50%;
+      animation: pulse-dot 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .45; transform: scale(.75); }
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5vw, 4.6rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.01em;
+      color: white;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-headline .accent { color: var(--ice); }
+
+    .hero-sub {
+      color: rgba(255,255,255,.58);
+      font-size: .95rem;
+      line-height: 1.65;
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Botões */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      background: var(--ice);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: .925rem;
+      letter-spacing: .025em;
+      padding: .9rem 2rem;
+      border-radius: var(--radius-btn);
+      border: 2px solid var(--ice);
+      transition: all .22s;
+    }
+
+    .btn-primary:hover {
+      background: #7DD3FC;
+      border-color: #7DD3FC;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(56,189,248,.38);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      background: transparent;
+      color: rgba(255,255,255,.88);
+      font-weight: 600;
+      font-size: .925rem;
+      letter-spacing: .025em;
+      padding: .9rem 2rem;
+      border-radius: var(--radius-btn);
+      border: 2px solid rgba(255,255,255,.22);
+      transition: all .22s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--ice);
+      color: var(--ice);
+      transform: translateY(-2px);
+    }
+
+    /* Ilustração SVG hero */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ac-svg-wrap {
+      width: 100%;
+      max-width: 680px;
+      filter: drop-shadow(0 0 64px rgba(56,189,248,.18));
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-18px); }
+    }
+
+
+    /* ── SECTION SHELL ─────────────────────────────────────────── */
+    section { padding: 3.75rem 2rem; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: .6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+    }
+
+    .section-title .accent { color: var(--sky); }
+
+    .swipe-hint { display: none; }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-top: 1rem;
+      max-width: 540px;
+    }
+
+    /* ── SERVIÇOS ──────────────────────────────────────────────── */
+    #servicos { background: #F8FAFC; }
+
+    .services-head { margin-bottom: 2rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s cubic-bezier(.23,1,.32,1),
+                  box-shadow .35s cubic-bezier(.23,1,.32,1),
+                  border-color .35s;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--ice));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .45s cubic-bezier(.23,1,.32,1);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(56,189,248,.25);
+    }
+
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .card-num {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.75rem;
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: #E9EFF5;
+      letter-spacing: -.04em;
+      transition: color .35s;
+      user-select: none;
+    }
+
+    .service-card:hover .card-num { color: rgba(56,189,248,.13); }
+
+    .svc-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .svc-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--sky);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .service-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .service-card li {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .8rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    .service-card li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--ice);
+      border-radius: 50%;
+      margin-top: .5rem;
+      flex-shrink: 0;
+    }
+
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      color: var(--sky);
+      font-weight: 600;
+      font-size: .85rem;
+      letter-spacing: .03em;
+      transition: gap .2s, color .2s;
+      position: relative;
+    }
+
+    .svc-link:hover { gap: .8rem; }
+
+    .svc-link svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      transition: transform .2s;
+    }
+
+    .svc-link:hover svg { transform: translateX(3px); }
+
+    /* ── SOBRE / DIFERENCIAIS ──────────────────────────────────── */
+    #sobre {
+      background: white;
+      padding: 0;       /* sub-containers gerenciam o próprio espaçamento */
+    }
+
+    .sobre-quals {
+      padding: 3.75rem 2rem;
+      background: white;
+    }
+
+    .sobre-stats {
+      background: var(--navy);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sobre-stats::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sobre-stats::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(3,105,161,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .diff-item {
+      padding: 1.2rem;
+      background: var(--light);
+      border-radius: 13px;
+      border: 1px solid rgba(14,165,233,.1);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    .diff-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(14,165,233,.1);
+      border-color: rgba(14,165,233,.25);
+    }
+
+    .diff-icon-wrap {
+      width: 42px;
+      height: 42px;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(14,165,233,.14);
+      margin-bottom: 1rem;
+    }
+
+    .diff-icon-wrap svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--sky);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .diff-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--dark);
+      margin-bottom: .45rem;
+    }
+
+    .diff-item p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .stat-item { position: relative; z-index: 1; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.7rem;
+      font-weight: 900;
+      color: var(--ice);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .stat-label {
+      color: rgba(255,255,255,.48);
+      font-size: .8rem;
+      line-height: 1.45;
+      margin-top: .35rem;
+    }
+
+    /* ── DEPOIMENTOS ───────────────────────────────────────────── */
+    #depoimentos { background: var(--light); }
+
+    .testimonials-head {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .t-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      border: 1px solid rgba(14,165,233,.1);
+      transition: transform .3s, box-shadow .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .t-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(14,165,233,.1);
+    }
+
+    .t-quote {
+      font-family: Georgia, serif;
+      font-size: 3.2rem;
+      color: var(--ice);
+      line-height: 1;
+      margin-bottom: .25rem;
+      opacity: .7;
+    }
+
+    .t-text {
+      font-size: .9rem;
+      font-style: italic;
+      color: var(--slate);
+      line-height: 1.8;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+
+    .t-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .t-stars { color: #F59E0B; font-size: .78rem; letter-spacing: 1px; }
+    .t-name  { font-weight: 600; font-size: .88rem; color: var(--dark); }
+    .t-loc   { font-size: .76rem; color: var(--muted); }
+
+    /* ── CONTATO ───────────────────────────────────────────────── */
+    #contato {
+      background: var(--navy-2);
+      padding: 7rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contato::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,.035) 1px, transparent 1px);
+      background-size: 54px 54px;
+    }
+
+    #contato::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(14,165,233,.09) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cta-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ice);
+      margin-bottom: 1rem;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .cta-sub {
+      color: rgba(255,255,255,.5);
+      font-size: .975rem;
+      max-width: 480px;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+
+    .contact-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .cbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1rem 1.9rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .925rem;
+      letter-spacing: .02em;
+      transition: all .25s;
+      white-space: nowrap;
+    }
+
+    .cbtn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .cbtn-whatsapp {
+      background: #25D366;
+      color: white;
+      fill: white;
+    }
+
+    .cbtn-whatsapp:hover {
+      background: #20C05C;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,.3);
+    }
+
+    .cbtn-instagram {
+      background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+      color: white;
+    }
+
+    .cbtn-instagram svg {
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cbtn-instagram:hover {
+      filter: brightness(1.1);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(253,29,29,.28);
+    }
+
+    .cbtn-maps {
+      background: rgba(56,189,248,.1);
+      color: var(--ice);
+      border: 1px solid rgba(56,189,248,.28);
+    }
+
+    .cbtn-maps svg {
+      stroke: var(--ice);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cbtn-maps:hover {
+      background: rgba(56,189,248,.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(56,189,248,.15);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: #050D14;
+      padding: 4rem 2rem 2rem;
+      border-top: 1px solid rgba(56,189,248,.07);
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr;
+      gap: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .f-brand img {
+      height: 42px;
+      width: auto;
+      margin-bottom: 1.1rem;
+    }
+
+    .f-brand p {
+      color: rgba(255,255,255,.38);
+      font-size: .86rem;
+      max-width: 280px;
+      line-height: 1.7;
+    }
+
+    .f-socials {
+      display: flex;
+      gap: .65rem;
+      margin-top: 1.5rem;
+    }
+
+    .f-soc {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,.05);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, transform .2s;
+    }
+
+    .f-soc:hover {
+      background: rgba(56,189,248,.18);
+      transform: translateY(-2px);
+    }
+
+    .f-soc svg {
+      width: 16px; height: 16px;
+      stroke: rgba(255,255,255,.6);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .f-col h5 {
+      color: white;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .f-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .f-col a {
+      color: rgba(255,255,255,.38);
+      font-size: .86rem;
+      transition: color .2s;
+    }
+
+    .f-col a:hover { color: var(--ice); }
+
+    .f-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+
+    .f-bottom p, .f-bottom a {
+      color: rgba(255,255,255,.25);
+      font-size: .78rem;
+      transition: color .2s;
+    }
+
+    .f-bottom a:hover { color: var(--ice); }
+
+    /* ── SCROLL REVEAL ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .75s cubic-bezier(.23,1,.32,1),
+                  transform .75s cubic-bezier(.23,1,.32,1);
+    }
+
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 70px;
+      }
+
+      .hero-actions { justify-content: center; }
+      .hero-sub     { margin-left: auto; margin-right: auto; }
+
+      .hero-visual  { order: -1; }
+      .ac-svg-wrap  { max-width: 380px; }
+
+      .services-grid      { grid-template-columns: 1fr; }
+      .testimonials-grid  { grid-template-columns: 1fr 1fr; }
+      /* sobre-quals já é bloco único, nada a fazer */
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.25rem; }
+
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+
+      /* Hero mobile: empilhado, sem cortar conteúdo */
+      #hero {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        overflow-x: clip;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 80px 1.25rem 2.5rem;
+        gap: 1.25rem;
+      }
+
+      /* display:contents "eleva" os filhos de .hero-text
+         para filhos diretos do flex container, permitindo order */
+      .hero-text    { display: contents; }
+
+      .hero-badge   { order: 1; margin-bottom: 0; }
+      .hero-headline{ order: 2; }
+      .hero-sub     { order: 3; margin-left: auto; margin-right: auto; margin-bottom: 0; }
+      .hero-visual  { order: 4; width: 85%; max-width: 300px; margin: 0 auto; }
+      .hero-actions { order: 5; justify-content: center; }
+
+      .ac-svg-wrap  { max-width: 300px; }
+
+      /* ── Scroll horizontal dos cards ── */
+      .swipe-hint {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
+        user-select: none;
+      }
+
+      /* Serviços */
+      .services-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 16px;
+        scrollbar-width: none;
+      }
+      .services-grid::-webkit-scrollbar { display: none; }
+      .service-card {
+        flex: 0 0 80vw;
+        max-width: 300px;
+        scroll-snap-align: start;
+      }
+
+      /* Diferenciais */
+      .diff-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 16px;
+        scrollbar-width: none;
+        margin-top: 1rem;
+      }
+      .diff-grid::-webkit-scrollbar { display: none; }
+      .diff-item {
+        flex: 0 0 75vw;
+        max-width: 280px;
+        scroll-snap-align: start;
+      }
+
+      /* Depoimentos */
+      .testimonials-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 16px;
+        scrollbar-width: none;
+      }
+      .testimonials-grid::-webkit-scrollbar { display: none; }
+      .t-card {
+        flex: 0 0 80vw;
+        max-width: 300px;
+        scroll-snap-align: start;
+      }
+
+      /* stats-grid mantém 2x2 em mobile — já funciona por padrão */
+      .sobre-stats { padding: 2.5rem 1.25rem; }
+
+      .footer-grid  { grid-template-columns: 1fr; gap: 2.25rem; }
+      .f-bottom     { flex-direction: column; text-align: center; }
+
+      .contact-btns { flex-direction: column; align-items: center; }
+      .cbtn         { width: 100%; max-width: 300px; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: 2.8rem; }
+      /* stats-grid mantém 2 colunas mesmo em 480px — números curtos cabem bem */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
+  <nav id="navbar" aria-label="Navegação principal">
+    <div class="nav-logo">
+      <a href="#hero" aria-label="Ventus Climatização — Início">
+        <img src="Logo_Ventus.png" alt="Ventus Climatização">
+      </a>
+    </div>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#hero">Início</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li>
+        <a href="https://wa.me/5537999479097"
+           class="btn-nav-cta"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Solicitar orçamento pelo WhatsApp">
+          Solicitar Orçamento
+        </a>
+      </li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Menu mobile -->
+  <div id="mobile-menu" role="dialog" aria-label="Menu de navegação">
+    <button id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="#hero"     onclick="closeMenu()">Início</a>
+    <a href="#servicos" onclick="closeMenu()">Serviços</a>
+    <a href="#sobre"    onclick="closeMenu()">Sobre</a>
+    <a href="#contato"  onclick="closeMenu()">Contato</a>
+    <a href="https://wa.me/5537999479097"
+       class="mobile-cta"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="closeMenu()">Solicitar Orçamento</a>
+  </div>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Apresentação Ventus Climatização">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-container">
+      <!-- Texto -->
+      <div class="hero-text">
+        <div class="hero-badge" aria-label="Localização">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Divinópolis / MG — Desde 2018
+        </div>
+
+        <h1 class="hero-headline">
+          Clima<br>
+          perfeito,<br>
+          <span class="accent">onde você</span><br>
+          estiver.
+        </h1>
+
+        <p class="hero-sub">
+          Venda, instalação e manutenção de ar-condicionado com equipe técnica
+          certificada. Rapidez, qualidade e preço justo para residências e
+          empresas em toda a região de Divinópolis.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#servicos" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+            Ver Serviços
+          </a>
+          <a href="https://wa.me/5537999479097"
+             class="btn-ghost"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Falar com a Ventus no WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Ilustração SVG inline do ar-condicionado -->
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="ac-svg-wrap" viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração técnica de ar-condicionado split">
+          <!-- ── Unidade interna (evaporadora) ── -->
+          <rect x="20" y="60" width="440" height="130" rx="20" fill="rgba(14,165,233,.06)" stroke="rgba(56,189,248,.35)" stroke-width="1.5"/>
+          <!-- Moldura interna -->
+          <rect x="28" y="68" width="424" height="114" rx="15" fill="rgba(14,165,233,.04)" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+          <!-- Visor digital -->
+          <rect x="350" y="82" width="78" height="42" rx="7" fill="rgba(3,105,161,.45)" stroke="rgba(56,189,248,.55)" stroke-width="1.2"/>
+          <text x="389" y="109" font-family="monospace" font-size="18" font-weight="bold" fill="#38BDF8" text-anchor="middle">22°C</text>
+          <!-- LED de status -->
+          <circle cx="352" cy="87" r="3.5" fill="#38BDF8" opacity=".9">
+            <animate attributeName="opacity" values=".9;.25;.9" dur="2.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="364" cy="87" r="3.5" fill="#10B981" opacity=".55"/>
+          <!-- Grill de saída (venezianas) -->
+          <line x1="50" y1="148" x2="328" y2="148" stroke="rgba(56,189,248,.28)" stroke-width="1"/>
+          <line x1="50" y1="158" x2="328" y2="158" stroke="rgba(56,189,248,.28)" stroke-width="1"/>
+          <line x1="50" y1="168" x2="328" y2="168" stroke="rgba(56,189,248,.28)" stroke-width="1"/>
+          <line x1="50" y1="178" x2="328" y2="178" stroke="rgba(56,189,248,.28)" stroke-width="1"/>
+          <!-- Lamela de direcionamento -->
+          <rect x="42" y="182" width="296" height="7" rx="3.5" fill="rgba(56,189,248,.12)" stroke="rgba(56,189,248,.35)" stroke-width="1" transform="rotate(-1.5 190 185)"/>
+          <!-- Placa de modelo -->
+          <rect x="138" y="80" width="120" height="26" rx="5" fill="rgba(56,189,248,.05)" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+          <text x="198" y="98" font-family="sans-serif" font-size="9" font-weight="700" fill="rgba(56,189,248,.6)" text-anchor="middle" letter-spacing="2.5">VENTUS</text>
+          <!-- Sensor IR -->
+          <circle cx="88" cy="90" r="6" fill="rgba(14,165,233,.18)" stroke="rgba(56,189,248,.45)" stroke-width="1.2"/>
+          <circle cx="88" cy="90" r="2.5" fill="rgba(56,189,248,.35)"/>
+          <!-- Botão power -->
+          <circle cx="110" cy="90" r="5" fill="rgba(56,189,248,.1)" stroke="rgba(56,189,248,.35)" stroke-width="1">
+            <animate attributeName="opacity" values="1;.5;1" dur="4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- ── Suporte de parede ── -->
+          <rect x="20" y="188" width="440" height="10" rx="3" fill="rgba(56,189,248,.08)" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+
+          <!-- ── Tubulação (cobre) ── -->
+          <path d="M 480 115 C 500 115 500 285 480 285" stroke="rgba(56,189,248,.2)" stroke-width="2.5" fill="none" stroke-dasharray="6,4"/>
+          <circle cx="500" cy="115" r="4" fill="none" stroke="rgba(56,189,248,.25)" stroke-width="1"/>
+          <circle cx="500" cy="285" r="4" fill="none" stroke="rgba(56,189,248,.25)" stroke-width="1"/>
+
+          <!-- ── Unidade externa (condensadora) ── -->
+          <rect x="360" y="240" width="140" height="105" rx="12" fill="rgba(14,165,233,.06)" stroke="rgba(56,189,248,.28)" stroke-width="1.5"/>
+          <!-- Linhas do grill -->
+          <g stroke="rgba(56,189,248,.18)" stroke-width="1">
+            <line x1="378" y1="250" x2="378" y2="336"/>
+            <line x1="392" y1="250" x2="392" y2="336"/>
+            <line x1="406" y1="250" x2="406" y2="336"/>
+            <line x1="420" y1="250" x2="420" y2="336"/>
+            <line x1="434" y1="250" x2="434" y2="336"/>
+            <line x1="448" y1="250" x2="448" y2="336"/>
+            <line x1="462" y1="250" x2="462" y2="336"/>
+            <line x1="476" y1="250" x2="476" y2="336"/>
+            <line x1="490" y1="250" x2="490" y2="336"/>
+          </g>
+          <!-- Hélice do ventilador -->
+          <circle cx="425" cy="292" r="36" fill="none" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+          <!-- Pás + cubo agrupados para rotação -->
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 425 292"
+              to="360 425 292"
+              dur="2.4s"
+              repeatCount="indefinite"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1" transform="rotate(60,425,292)"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1" transform="rotate(120,425,292)"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1" transform="rotate(180,425,292)"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1" transform="rotate(240,425,292)"/>
+            <ellipse cx="425" cy="267" rx="6" ry="16" fill="rgba(56,189,248,.15)" stroke="rgba(56,189,248,.45)" stroke-width="1" transform="rotate(300,425,292)"/>
+            <!-- Cubo central -->
+            <circle cx="425" cy="292" r="11" fill="rgba(56,189,248,.18)" stroke="rgba(56,189,248,.55)" stroke-width="1.2"/>
+            <circle cx="425" cy="292" r="4"  fill="rgba(56,189,248,.4)"/>
+          </g>
+
+          <!-- ── Fluxo de ar animado saindo da unidade interna ── -->
+          <g>
+            <path d="M 58 207 C 70 222 85 215 60 234" stroke="#38BDF8" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <animate attributeName="opacity" values="0;.65;0" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 120 207 C 132 224 147 216 122 236" stroke="#38BDF8" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <animate attributeName="opacity" values="0;.65;0" dur="2.8s" begin=".4s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 182 207 C 194 223 209 216 184 235" stroke="#38BDF8" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <animate attributeName="opacity" values="0;.65;0" dur="2.8s" begin=".8s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 244 207 C 256 222 271 215 246 234" stroke="#38BDF8" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <animate attributeName="opacity" values="0;.65;0" dur="2.8s" begin="1.2s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 306 207 C 318 222 333 215 308 234" stroke="#38BDF8" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <animate attributeName="opacity" values="0;.65;0" dur="2.8s" begin="1.6s" repeatCount="indefinite"/>
+            </path>
+          </g>
+
+          <!-- ── Marcações técnicas decorativas ── -->
+          <text x="28" y="54" font-family="monospace" font-size="7.5" fill="rgba(56,189,248,.28)" letter-spacing="1">MODEL VT-12000BTU · INVERTER · R-410A</text>
+          <text x="360" y="54" font-family="monospace" font-size="7.5" fill="rgba(56,189,248,.28)" letter-spacing="1">EER 3.4</text>
+        </svg>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ SERVIÇOS ══════════════════════════════════════════════ -->
+  <section id="servicos" aria-label="Nossos serviços">
+    <div class="container">
+      <header class="services-head reveal">
+        <div class="section-label">O que fazemos</div>
+        <h2 class="section-title">Nossos <span class="accent">Serviços</span></h2>
+        <p class="section-desc">Soluções completas em climatização para deixar seu ambiente sempre no conforto ideal — residencial ou comercial.</p>
+      </header>
+
+      <div class="services-grid">
+
+        <!-- Card 1: Venda -->
+        <article class="service-card reveal d1">
+          <span class="card-num" aria-hidden="true">01</span>
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </div>
+          <h3>Venda de Equipamentos</h3>
+          <ul>
+            <li>Diversas marcas e modelos — 9.000 a 60.000 BTUs</li>
+            <li>Consultoria especializada para o equipamento ideal ao seu ambiente</li>
+            <li>Garantia de fábrica e nota fiscal em todas as aquisições</li>
+          </ul>
+          <a href="#contato" class="svc-link" aria-label="Solicitar orçamento de venda de equipamentos">
+            Solicitar orçamento
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <!-- Card 2: Instalação -->
+        <article class="service-card reveal d2">
+          <span class="card-num" aria-hidden="true">02</span>
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h3>Instalação Profissional</h3>
+          <ul>
+            <li>Equipe técnica certificada com anos de experiência</li>
+            <li>Instalação completa: suporte, tubulação cobre e elétrica</li>
+            <li>Teste e configuração completos com orientação ao cliente</li>
+          </ul>
+          <a href="#contato" class="svc-link" aria-label="Agendar instalação de ar-condicionado">
+            Agendar instalação
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <!-- Card 3: Manutenção -->
+        <article class="service-card reveal d3">
+          <span class="card-num" aria-hidden="true">03</span>
+          <div class="svc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/>
+            </svg>
+          </div>
+          <h3>Limpeza e Manutenção</h3>
+          <ul>
+            <li>Higienização profunda com produto bactericida certificado</li>
+            <li>Limpeza de filtros, evaporadora e condensadora</li>
+            <li>Prolonga a vida útil e melhora a qualidade do ar interno</li>
+          </ul>
+          <a href="#contato" class="svc-link" aria-label="Agendar limpeza e manutenção de ar-condicionado">
+            Agendar limpeza
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+      </div>
+      <p class="swipe-hint">← deslize para ver mais →</p>
+    </div>
+  </section>
+
+  <!-- ═══ SOBRE / DIFERENCIAIS ══════════════════════════════════ -->
+  <section id="sobre" aria-label="Por que escolher a Ventus">
+
+    <!-- Container 1: Diferenciais -->
+    <div class="sobre-quals">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Por que nos escolher</div>
+          <h2 class="section-title">Ventus na prática,<br><span class="accent">diferença real</span></h2>
+          <p class="section-desc">Não somos apenas uma empresa de ar-condicionado. Somos parceiros em conforto, com compromisso técnico e atendimento humano em cada visita.</p>
+        </div>
+
+        <div class="diff-grid">
+
+          <div class="diff-item reveal d1">
+            <div class="diff-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h4>Atendimento Rápido</h4>
+            <p>Respondemos em até 1 hora e agendamos no mesmo dia sempre que possível.</p>
+          </div>
+
+          <div class="diff-item reveal d2">
+            <div class="diff-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h4>Profissionais Certificados</h4>
+            <p>Equipe com certificação técnica e treinamento nas principais marcas do mercado.</p>
+          </div>
+
+          <div class="diff-item reveal d3">
+            <div class="diff-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+            </div>
+            <h4>Preço Justo e Transparente</h4>
+            <p>Orçamento detalhado sem surpresas — você sabe exatamente o que paga antes de fechar.</p>
+          </div>
+
+          <div class="diff-item reveal d4">
+            <div class="diff-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h4>Garantia no Serviço</h4>
+            <p>Todos os serviços têm garantia. Se algo não estiver certo, voltamos sem custo adicional.</p>
+          </div>
+
+        </div>
+        <p class="swipe-hint">← deslize para ver mais →</p>
+      </div>
+    </div>
+
+    <!-- Container 2: Números (full-width, fundo escuro) -->
+    <div class="sobre-stats reveal" aria-label="Números da Ventus Climatização">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Instalações realizadas com sucesso</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7+</div>
+            <div class="stat-label">Anos de experiência no mercado</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Clientes satisfeitos e fidelizados</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">24h</div>
+            <div class="stat-label">Atendimento de urgência disponível</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ DEPOIMENTOS ═══════════════════════════════════════════ -->
+  <section id="depoimentos" aria-label="Depoimentos de clientes">
+    <div class="container">
+      <header class="testimonials-head reveal">
+        <div class="section-label">Quem já foi atendido</div>
+        <h2 class="section-title">O que nossos <span class="accent">clientes</span> falam</h2>
+      </header>
+
+      <div class="testimonials-grid">
+
+        <article class="t-card reveal d1">
+          <div class="t-quote" aria-hidden="true">&ldquo;</div>
+          <p class="t-text">
+            Contratei a Ventus para instalar dois splits no meu escritório em Divinópolis.
+            Atendimento impecável, vieram no horário marcado e deixaram tudo organizado.
+            Preço honesto e equipamento de primeira. Super indico!
+          </p>
+          <footer class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg,#0369A1,#38BDF8);" aria-hidden="true">RC</div>
+            <div>
+              <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="t-name">Ricardo Carvalho</div>
+              <div class="t-loc">Empresário · Divinópolis/MG</div>
+            </div>
+          </footer>
+        </article>
+
+        <article class="t-card reveal d2">
+          <div class="t-quote" aria-hidden="true">&ldquo;</div>
+          <p class="t-text">
+            Fiz a limpeza do meu ar com eles e fiquei impressionada com o resultado.
+            O aparelho que estava fazendo barulho voltou a funcionar perfeito.
+            Técnico muito educado e caprichoso. Vou chamar de novo com certeza.
+          </p>
+          <footer class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg,#7C3AED,#C084FC);" aria-hidden="true">FS</div>
+            <div>
+              <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="t-name">Fernanda Souza</div>
+              <div class="t-loc">Professora · Divinópolis/MG</div>
+            </div>
+          </footer>
+        </article>
+
+        <article class="t-card reveal d3">
+          <div class="t-quote" aria-hidden="true">&ldquo;</div>
+          <p class="t-text">
+            Precisei urgente de um ar instalado no meu salão de beleza.
+            A equipe da Ventus atendeu no mesmo dia, trabalho excelente e com ótimo preço.
+            Atendimento pelo WhatsApp também muito rápido. Ótima empresa!
+          </p>
+          <footer class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg,#059669,#34D399);" aria-hidden="true">AM</div>
+            <div>
+              <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="t-name">Aline Martins</div>
+              <div class="t-loc">Empreendedora · Divinópolis/MG</div>
+            </div>
+          </footer>
+        </article>
+
+      </div>
+      <p class="swipe-hint">← deslize para ver mais →</p>
+    </div>
+  </section>
+
+  <!-- ═══ CONTATO / CTA ═════════════════════════════════════════ -->
+  <section id="contato" aria-label="Contato e orçamento">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-label">Fale com a gente agora</div>
+        <h2 class="cta-title">Pronto para instalar<br>ou fazer manutenção?</h2>
+        <p class="cta-sub">
+          Entre em contato pelo canal de sua preferência. Respondemos rápido e
+          agendamos no melhor horário para você.
+        </p>
+
+        <div class="contact-btns">
+          <a href="https://wa.me/5537999479097"
+             class="cbtn cbtn-whatsapp"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Chamar a Ventus no WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Chamar no WhatsApp
+          </a>
+
+          <a href="https://www.instagram.com/ventus_climatizacao/"
+             class="cbtn cbtn-instagram"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Ver o Instagram da Ventus">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+            @ventus_climatizacao
+          </a>
+
+          <a href="https://maps.app.goo.gl/2L5DYaT4fZuWZeVJ6"
+             class="cbtn cbtn-maps"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Ver localização no mapa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Ver no Mapa
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+
+      <div class="f-brand">
+        <img src="Logo_Ventus.png" alt="Ventus Climatização">
+        <p>Climatização residencial e comercial com tecnologia, conforto e cuidado em Divinópolis e região de Minas Gerais.</p>
+        <nav class="f-socials" aria-label="Redes sociais">
+          <a href="https://www.instagram.com/ventus_climatizacao/"
+             class="f-soc"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Instagram da Ventus">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/5537999479097"
+             class="f-soc"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="WhatsApp da Ventus">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </a>
+        </nav>
+      </div>
+
+      <div class="f-col">
+        <h5>Links rápidos</h5>
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="f-col">
+        <h5>Serviços</h5>
+        <ul>
+          <li><a href="#servicos">Venda de Equipamentos</a></li>
+          <li><a href="#servicos">Instalação Profissional</a></li>
+          <li><a href="#servicos">Limpeza e Manutenção</a></li>
+          <li><a href="https://wa.me/5537999479097" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="f-bottom">
+      <p>© 2025 Ventus Climatização. Todos os direitos reservados.</p>
+      <p>Site desenvolvido por <a href="https://www.instagram.com/brotaweb" target="_blank" rel="noopener noreferrer">Brota Web</a></p>
+    </div>
+  </footer>
+
+
+  <script>
+    /* ── NAVBAR SCROLL ─────────────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          navbar.classList.toggle('scrolled', window.scrollY > 60);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* ── HAMBURGER ─────────────────────────────────────────────── */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+
+    function openMenu() {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+    });
+
+    /* ── SCROLL REVEAL ─────────────────────────────────────────── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── ICE PARTICLES ─────────────────────────────────────────── */
+    (function () {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx    = canvas.getContext('2d');
+      const COUNT  = 90;
+      let   W, H;
+      let   animId = null;
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      class Particle {
+        constructor(randomY) {
+          this.init(randomY);
+        }
+
+        init(randomY) {
+          this.x      = Math.random() * W;
+          this.y      = randomY ? Math.random() * H : H + 10;
+          this.r      = Math.random() * 2.2 + 0.5;
+          this.vy     = -(Math.random() * 0.55 + 0.18);
+          this.vx     = (Math.random() - 0.5) * 0.28;
+          this.rot    = Math.random() * Math.PI * 2;
+          this.drot   = (Math.random() - 0.5) * 0.012;
+          this.alpha  = Math.random() * 0.45 + 0.08;
+          this.life   = 0;
+          this.maxL   = Math.random() * 280 + 180;
+          this.isFlake= Math.random() > 0.55;
+        }
+
+        update() {
+          this.x   += this.vx;
+          this.y   += this.vy;
+          this.rot += this.drot;
+          this.life++;
+          if (this.life >= this.maxL || this.y < -16) this.init(false);
+        }
+
+        draw() {
+          const fade = Math.sin((this.life / this.maxL) * Math.PI);
+          ctx.save();
+          ctx.globalAlpha = this.alpha * fade;
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rot);
+
+          if (this.isFlake) {
+            ctx.strokeStyle = '#38BDF8';
+            ctx.lineWidth   = 0.8;
+            ctx.beginPath();
+            const arms = 6;
+            for (let i = 0; i < arms; i++) {
+              const a = (i / arms) * Math.PI * 2;
+              ctx.moveTo(0, 0);
+              ctx.lineTo(Math.cos(a) * this.r * 2.8, Math.sin(a) * this.r * 2.8);
+              /* tiny cross at tip */
+              const tx = Math.cos(a) * this.r * 2;
+              const ty = Math.sin(a) * this.r * 2;
+              const ta = a + Math.PI / 2;
+              ctx.moveTo(tx + Math.cos(ta) * this.r * .7, ty + Math.sin(ta) * this.r * .7);
+              ctx.lineTo(tx - Math.cos(ta) * this.r * .7, ty - Math.sin(ta) * this.r * .7);
+            }
+            ctx.stroke();
+          } else {
+            ctx.fillStyle = '#38BDF8';
+            ctx.beginPath();
+            ctx.arc(0, 0, this.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      const particles = Array.from({ length: COUNT }, () => new Particle(true));
+
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        animId = requestAnimationFrame(tick);
+      }
+
+      /* Pause when hero not visible (perf) */
+      const heroSection = document.getElementById('hero');
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !animId) { tick(); }
+          else if (!e.isIntersecting && animId) { cancelAnimationFrame(animId); animId = null; }
+        });
+      }, { threshold: 0 }).observe(heroSection);
+
+      tick();
+    })();
+  </script>
+
+</body>
+</html>
