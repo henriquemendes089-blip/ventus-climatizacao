@@ -75,10 +75,22 @@
       padding: .9rem 2rem;
     }
 
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
     .nav-logo img {
-      height: 46px;
+      height: 40px;
       width: auto;
-      object-fit: contain;
+    }
+    .nav-logo span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
     }
 
     .nav-links {
@@ -1126,6 +1138,8 @@
 
       .nav-links  { display: none; }
       .hamburger  { display: flex; }
+      .nav-logo img  { height: 32px; }
+      .nav-logo span { font-size: 15px; }
 
       /* Hero mobile: empilhado, sem cortar conteúdo */
       #hero {
@@ -1255,11 +1269,10 @@
 
   <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
   <nav id="navbar" aria-label="Navegação principal">
-    <div class="nav-logo">
-      <a href="#hero" aria-label="Ventus Climatização — Início">
-        <img src="Logo_Ventus.png" alt="Ventus Climatização">
-      </a>
-    </div>
+    <a href="#hero" class="nav-logo" aria-label="Ventus Climatização — Início">
+      <img src="Logo_Ventus.png" alt="Ventus Climatização">
+      <span>Ventus Climatização</span>
+    </a>
 
     <ul class="nav-links" role="list">
       <li><a href="#hero">Início</a></li>
