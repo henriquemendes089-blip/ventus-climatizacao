@@ -1563,19 +1563,19 @@
       <div class="container">
         <div class="stats-grid">
           <div class="stat-item">
-            <div class="stat-num">500+</div>
+            <div class="stat-num" data-target="700" data-suffix="+">700+</div>
             <div class="stat-label">Instalações realizadas com sucesso</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">7+</div>
+            <div class="stat-num" data-target="7" data-suffix="+">7+</div>
             <div class="stat-label">Anos de experiência no mercado</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">98%</div>
+            <div class="stat-num" data-target="100" data-suffix="%">100%</div>
             <div class="stat-label">Clientes satisfeitos e fidelizados</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">24h</div>
+            <div class="stat-num" data-target="24" data-suffix="h">24h</div>
             <div class="stat-label">Atendimento de urgência disponível</div>
           </div>
         </div>
@@ -1988,6 +1988,38 @@
       }, { threshold: 0 }).observe(heroSection);
 
       tick();
+    })();
+
+    /* ── COUNTER ANIMATION ─────────────────────────────────────── */
+    (function () {
+      function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+      function animateCounter(el) {
+        const target   = parseInt(el.dataset.target, 10);
+        const suffix   = el.dataset.suffix || '';
+        const duration = 1600;
+        const start    = performance.now();
+
+        function update(now) {
+          const elapsed  = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          el.textContent = Math.round(easeOutQuart(progress) * target) + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+
+      const counters = document.querySelectorAll('.stat-num[data-target]');
+      const counterObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+
+      counters.forEach(el => counterObs.observe(el));
     })();
 
     /* ── REMOVE FUNDO BRANCO DA LOGO (canvas) ─────────────────── */
