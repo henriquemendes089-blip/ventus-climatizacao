@@ -1980,6 +1980,35 @@
 
       tick();
     })();
+
+    /* ── REMOVE FUNDO BRANCO DA LOGO (canvas) ─────────────────── */
+    (function () {
+      function removeBgBranco(img) {
+        const canvas = document.createElement('canvas');
+        canvas.width  = img.naturalWidth  || img.width;
+        canvas.height = img.naturalHeight || img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const px = data.data;
+        for (let i = 0; i < px.length; i += 4) {
+          /* apaga pixels brancos / quase-brancos (r,g,b todos > 220) */
+          if (px[i] > 220 && px[i+1] > 220 && px[i+2] > 220) {
+            px[i+3] = 0;
+          }
+        }
+        ctx.putImageData(data, 0, 0);
+        img.src = canvas.toDataURL('image/png');
+      }
+
+      document.querySelectorAll('.nav-logo img, .f-brand img').forEach(img => {
+        if (img.complete && img.naturalWidth) {
+          removeBgBranco(img);
+        } else {
+          img.addEventListener('load', () => removeBgBranco(img));
+        }
+      });
+    })();
   </script>
 
 </body>
