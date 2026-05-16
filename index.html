@@ -2431,107 +2431,218 @@
   </div>
 
   <script>
-  /* ── QUIZ WHATSAPP ─────────────────────────────────────────── */
+  /* ── QUIZ WHATSAPP — FLUXOS POR SERVIÇO ────────────────────── */
   (function () {
-    const STEPS = [
-      { type: 'name' },
-      {
-        type: 'options',
-        q: 'Qual serviço você precisa?',
-        opts: [
-          '🛒 Quero comprar um ar-condicionado',
-          '🔧 Preciso de instalação',
-          '🧹 Quero limpar / fazer manutenção',
-          '❓ Ainda não sei, quero um orçamento'
-        ]
+
+    /* ── Árvore de fluxos ────────────────────────────────── */
+    var FLUXOS = {
+      compra: {
+        label: '🛒 Compra de ar-condicionado',
+        passos: [
+          { q: 'Qual o tamanho do ambiente?',
+            opts: ['📦 Pequeno (até 20m²)', '🏠 Médio (20 a 30m²)', '🏡 Grande (30 a 50m²)', '🏢 Muito grande (acima de 50m²)'] },
+          { q: 'Você tem preferência de modelo?',
+            opts: ['❄️ Split Inverter (econômico)', '🌀 Split Convencional', '🤷 Não sei, me ajude a escolher'] },
+          { q: 'A parte elétrica já está preparada?',
+            opts: ['✅ Sim, já está pronta', '🔌 Não, vou precisar de elétrica também', '❓ Não sei'] }
+        ],
+        mensagem: function (nome, r) {
+          return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
+                 'Interesse: Compra de ar-condicionado\n' +
+                 'Tamanho do ambiente: ' + r[0] + '\n' +
+                 'Modelo: ' + r[1] + '\n' +
+                 'Elétrica: ' + r[2] + '\n' +
+                 'Gostaria de um orçamento!';
+        }
       },
-      {
-        type: 'options',
-        q: 'Para qual ambiente?',
-        opts: ['🏠 Casa', '🏢 Apartamento (andar alto)', '🏬 Comércio / Loja', '🏭 Empresa / Escritório']
+      instalacao: {
+        label: '🔧 Instalação',
+        passos: [
+          { q: 'Você já tem o aparelho?',
+            opts: ['✅ Sim, já tenho o equipamento', '🛒 Não, preciso comprar também'] },
+          { q: 'Qual o tipo de ambiente?',
+            opts: ['🏠 Casa', '🏢 Apartamento (andar alto)', '🏬 Comércio / Loja', '🏭 Empresa / Escritório'] },
+          { q: 'Já tem infraestrutura (encanamento/elétrica)?',
+            opts: ['✅ Sim, já tenho', '❌ Não, vai precisar fazer', '❓ Não sei'] }
+        ],
+        mensagem: function (nome, r) {
+          return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
+                 'Serviço: Instalação\n' +
+                 'Tem o aparelho: ' + r[0] + '\n' +
+                 'Ambiente: ' + r[1] + '\n' +
+                 'Infraestrutura: ' + r[2] + '\n' +
+                 'Gostaria de um orçamento!';
+        }
       },
-      {
-        type: 'options',
-        q: 'Qual a urgência?',
-        opts: ['⚡ Urgente (hoje ou amanhã)', '📅 Essa semana', '🗓️ Sem pressa, quero planejar']
-      }
+      manutencao: {
+        label: '⚠️ Manutenção / Defeito',
+        passos: [
+          { q: 'Qual o problema que está enfrentando?',
+            opts: ['🔴 O aparelho não liga', '🥵 Liga mas não esfria', '🔊 Está fazendo barulho estranho', '💧 Está vazando água', '❓ Outro problema'] },
+          { q: 'Qual o tipo de ambiente?',
+            opts: ['🏠 Casa', '🏢 Apartamento (andar alto)', '🏬 Comércio / Loja', '🏭 Empresa / Escritório'] },
+          { q: 'Qual a urgência?',
+            opts: ['⚡ Urgente (hoje ou amanhã)', '📅 Essa semana', '🗓️ Sem pressa'] }
+        ],
+        mensagem: function (nome, r) {
+          return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
+                 'Serviço: Manutenção / Defeito\n' +
+                 'Problema: ' + r[0] + '\n' +
+                 'Ambiente: ' + r[1] + '\n' +
+                 'Urgência: ' + r[2] + '\n' +
+                 'Gostaria de agendar uma visita técnica!';
+        }
+      },
+      higienizacao: {
+        label: '🧹 Higienização',
+        passos: [
+          { q: 'Quantos aparelhos precisam de higienização?',
+            opts: ['1️⃣ Apenas 1 aparelho', '2️⃣ 2 aparelhos', '3️⃣ 3 ou mais aparelhos'] },
+          { q: 'Qual o tipo de ambiente?',
+            opts: ['🏠 Casa', '🏢 Apartamento (andar alto)', '🏬 Comércio / Loja', '🏭 Empresa / Escritório'] },
+          { q: 'Qual a urgência?',
+            opts: ['⚡ Urgente (hoje ou amanhã)', '📅 Essa semana', '🗓️ Sem pressa'] }
+        ],
+        mensagem: function (nome, r) {
+          return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
+                 'Serviço: Higienização\n' +
+                 'Quantidade de aparelhos: ' + r[0] + '\n' +
+                 'Ambiente: ' + r[1] + '\n' +
+                 'Urgência: ' + r[2] + '\n' +
+                 'Gostaria de agendar!';
+        }
+      },
+      duvida: { label: '💬 Tirar uma dúvida', direto: true }
+    };
+
+    var SERVICOS = [
+      { key: 'compra',       txt: '🛒 Quero comprar um ar-condicionado' },
+      { key: 'instalacao',   txt: '🔧 Preciso de instalação' },
+      { key: 'manutencao',   txt: '⚠️ Ar-condicionado com defeito / Manutenção' },
+      { key: 'higienizacao', txt: '🧹 Preciso fazer higienização' },
+      { key: 'duvida',       txt: '💬 Gostaria de tirar uma dúvida' }
     ];
 
-    let step = 0, nome = '', answers = [];
+    /* ── Estado ──────────────────────────────────────────── */
+    var nome = '', fluxoKey = null, passoAtual = 0, respostas = [];
 
-    const overlay  = document.getElementById('quiz-overlay');
-    const closeBtn = document.getElementById('quiz-close');
-    const progress = document.getElementById('quiz-progress');
-    const stepLbl  = document.getElementById('quiz-step-label');
-    const question = document.getElementById('quiz-question');
-    const body     = document.getElementById('quiz-body');
+    /* ── Elementos DOM ───────────────────────────────────── */
+    var overlay  = document.getElementById('quiz-overlay');
+    var closeBtn = document.getElementById('quiz-close');
+    var progress = document.getElementById('quiz-progress');
+    var stepLbl  = document.getElementById('quiz-step-label');
+    var question = document.getElementById('quiz-question');
+    var body     = document.getElementById('quiz-body');
 
+    /* ── Abrir / fechar ──────────────────────────────────── */
     function open() {
-      step = 0; nome = ''; answers = [];
-      render();
+      nome = ''; fluxoKey = null; passoAtual = 0; respostas = [];
+      renderNome();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function close() {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    function render() {
-      const total = STEPS.length;
-      progress.style.width = (step / total * 100) + '%';
-      stepLbl.textContent  = 'Passo ' + (step + 1) + ' de ' + total;
-      const s = STEPS[step];
-
-      if (s.type === 'name') {
-        question.textContent = 'Qual o seu nome?';
-        body.innerHTML =
-          '<input class="quiz-input" id="qni" type="text" placeholder="Digite seu nome..." maxlength="40" autocomplete="given-name">' +
-          '<button class="quiz-btn-primary" id="qnb" disabled>Continuar →</button>';
-        const inp = document.getElementById('qni');
-        const btn = document.getElementById('qnb');
-        inp.focus();
-        inp.addEventListener('input', function () {
-          btn.disabled = inp.value.trim().length < 2;
-        });
-        function goNext() { nome = inp.value.trim(); step++; render(); }
-        btn.addEventListener('click', goNext);
-        inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !btn.disabled) goNext(); });
-
-      } else {
-        const greeting = nome ? 'Olá ' + nome + '! ' : '';
-        question.textContent = greeting + s.q;
-        var html = '<div class="quiz-options">';
-        s.opts.forEach(function (o, i) {
-          html += '<button class="quiz-option" data-i="' + i + '">' + o + '</button>';
-        });
-        html += '</div>';
-        if (step > 0) html += '<button class="quiz-btn-back" id="quiz-back">← Voltar</button>';
-        body.innerHTML = html;
-
-        body.querySelectorAll('.quiz-option').forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            answers[step - 1] = STEPS[step].opts[+btn.dataset.i];
-            if (step < STEPS.length - 1) { step++; render(); }
-            else finalize();
-          });
-        });
-        var back = document.getElementById('quiz-back');
-        if (back) back.addEventListener('click', function () { step--; render(); });
-      }
+    /* ── Utilitário de progresso ─────────────────────────── */
+    function setProgress(atual, total, label) {
+      progress.style.width = (atual / total * 100) + '%';
+      stepLbl.textContent  = label;
     }
 
-    function finalize() {
-      var msg = 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
-                'Serviço: ' + answers[0] + '\n' +
-                'Ambiente: ' + answers[1] + '\n' +
-                'Urgência: ' + answers[2] + '\n' +
-                'Gostaria de um orçamento!';
+    /* ── PASSO 0: Nome ───────────────────────────────────── */
+    function renderNome() {
+      setProgress(0, 5, 'Passo 1 de 5');
+      question.textContent = 'Antes de tudo, como podemos te chamar? 😊';
+      body.innerHTML =
+        '<input class="quiz-input" id="qni" type="text" placeholder="Digite seu nome..." maxlength="40" autocomplete="given-name">' +
+        '<button class="quiz-btn-primary" id="qnb" disabled>Continuar →</button>';
+      var inp = document.getElementById('qni');
+      var btn = document.getElementById('qnb');
+      inp.focus();
+      inp.addEventListener('input', function () { btn.disabled = inp.value.trim().length < 2; });
+      function goNext() { nome = inp.value.trim(); renderServicos(); }
+      btn.addEventListener('click', goNext);
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !btn.disabled) goNext(); });
+    }
+
+    /* ── PASSO 1: Escolha do serviço ─────────────────────── */
+    function renderServicos() {
+      setProgress(1, 5, 'Passo 2 de 5');
+      question.textContent = 'Ótimo, ' + nome + '! O que você precisa?';
+      var html = '<div class="quiz-options">';
+      SERVICOS.forEach(function (s) {
+        html += '<button class="quiz-option" data-key="' + s.key + '">' + s.txt + '</button>';
+      });
+      html += '</div><button class="quiz-btn-back" id="quiz-back">← Voltar</button>';
+      body.innerHTML = html;
+
+      body.querySelectorAll('.quiz-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          fluxoKey = btn.dataset.key;
+          respostas = [];
+          passoAtual = 0;
+          var fluxo = FLUXOS[fluxoKey];
+          if (fluxo.direto) {
+            finalizarDireto();
+          } else {
+            renderPasso();
+          }
+        });
+      });
+      document.getElementById('quiz-back').addEventListener('click', renderNome);
+    }
+
+    /* ── PASSOS do fluxo escolhido ───────────────────────── */
+    function renderPasso() {
+      var fluxo  = FLUXOS[fluxoKey];
+      var passo  = fluxo.passos[passoAtual];
+      var total  = 2 + fluxo.passos.length; /* nome + serviço + Nperguntas */
+      var atual  = 2 + passoAtual;
+      setProgress(atual, total, 'Passo ' + (atual + 1) + ' de ' + (total + 1));
+      question.textContent = passo.q;
+
+      var html = '<div class="quiz-options">';
+      passo.opts.forEach(function (o, i) {
+        html += '<button class="quiz-option" data-i="' + i + '">' + o + '</button>';
+      });
+      html += '</div><button class="quiz-btn-back" id="quiz-back">← Voltar</button>';
+      body.innerHTML = html;
+
+      body.querySelectorAll('.quiz-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          respostas[passoAtual] = passo.opts[+btn.dataset.i];
+          if (passoAtual < fluxo.passos.length - 1) {
+            passoAtual++;
+            renderPasso();
+          } else {
+            finalizar();
+          }
+        });
+      });
+
+      document.getElementById('quiz-back').addEventListener('click', function () {
+        if (passoAtual === 0) { renderServicos(); }
+        else { passoAtual--; renderPasso(); }
+      });
+    }
+
+    /* ── Finalizar com mensagem personalizada ────────────── */
+    function finalizar() {
+      var msg = FLUXOS[fluxoKey].mensagem(nome, respostas);
       close();
       window.open('https://wa.me/5537999479097?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     }
 
+    function finalizarDireto() {
+      var msg = 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\nGostaria de tirar uma dúvida. 😊';
+      close();
+      window.open('https://wa.me/5537999479097?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    }
+
+    /* ── Eventos globais ─────────────────────────────────── */
     closeBtn.addEventListener('click', close);
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
