@@ -2113,7 +2113,7 @@
     </div>
 
     <div class="f-bottom">
-      <p>© 2025 Ventus Climatização. Todos os direitos reservados.</p>
+      <p>© 2026 Ventus Climatização. Todos os direitos reservados.</p>
       <p>Site desenvolvido por <a href="https://www.instagram.com/brotaweb" target="_blank" rel="noopener noreferrer">Brota Web</a></p>
     </div>
   </footer>
@@ -2434,6 +2434,11 @@
   /* ── QUIZ WHATSAPP — FLUXOS POR SERVIÇO ────────────────────── */
   (function () {
 
+    /* ── Remove emojis do texto antes de montar a mensagem ── */
+    function limparTexto(texto) {
+      return texto.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim();
+    }
+
     /* ── Árvore de fluxos ────────────────────────────────── */
     var FLUXOS = {
       compra: {
@@ -2449,9 +2454,9 @@
         mensagem: function (nome, r) {
           return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
                  'Interesse: Compra de ar-condicionado\n' +
-                 'Tamanho do ambiente: ' + r[0] + '\n' +
-                 'Modelo: ' + r[1] + '\n' +
-                 'Elétrica: ' + r[2] + '\n' +
+                 'Tamanho do ambiente: ' + limparTexto(r[0]) + '\n' +
+                 'Modelo: ' + limparTexto(r[1]) + '\n' +
+                 'Elétrica: ' + limparTexto(r[2]) + '\n' +
                  'Gostaria de um orçamento!';
         }
       },
@@ -2468,9 +2473,9 @@
         mensagem: function (nome, r) {
           return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
                  'Serviço: Instalação\n' +
-                 'Tem o aparelho: ' + r[0] + '\n' +
-                 'Ambiente: ' + r[1] + '\n' +
-                 'Infraestrutura: ' + r[2] + '\n' +
+                 'Tem o aparelho: ' + limparTexto(r[0]) + '\n' +
+                 'Ambiente: ' + limparTexto(r[1]) + '\n' +
+                 'Infraestrutura: ' + limparTexto(r[2]) + '\n' +
                  'Gostaria de um orçamento!';
         }
       },
@@ -2487,9 +2492,9 @@
         mensagem: function (nome, r) {
           return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
                  'Serviço: Manutenção / Defeito\n' +
-                 'Problema: ' + r[0] + '\n' +
-                 'Ambiente: ' + r[1] + '\n' +
-                 'Urgência: ' + r[2] + '\n' +
+                 'Problema: ' + limparTexto(r[0]) + '\n' +
+                 'Ambiente: ' + limparTexto(r[1]) + '\n' +
+                 'Urgência: ' + limparTexto(r[2]) + '\n' +
                  'Gostaria de agendar uma visita técnica!';
         }
       },
@@ -2506,9 +2511,9 @@
         mensagem: function (nome, r) {
           return 'Olá! Me chamo ' + nome + ' e vim pelo site da Ventus.\n' +
                  'Serviço: Higienização\n' +
-                 'Quantidade de aparelhos: ' + r[0] + '\n' +
-                 'Ambiente: ' + r[1] + '\n' +
-                 'Urgência: ' + r[2] + '\n' +
+                 'Quantidade de aparelhos: ' + limparTexto(r[0]) + '\n' +
+                 'Ambiente: ' + limparTexto(r[1]) + '\n' +
+                 'Urgência: ' + limparTexto(r[2]) + '\n' +
                  'Gostaria de agendar!';
         }
       },
